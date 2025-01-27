@@ -39,7 +39,7 @@ Table 1. Explanation of CLI command values:
 | 2 | weights     | Path to the ultralytics model weights file (ex: yolov8m-seg.pt, yolov9c.pt, FastSAM-x.pt)       |  -           |
 | 3 | yaml_pth       | The path to configuration yaml file                                                          | config.yaml |
 | 4 | annotations_zip       | Name of the COCO CVAT annotation zip archive produced by the program                  | annotations  |
-| 5 | save_photo      | Whether to create a file .zip photos to upload to CVAT                                      | False        |
+| 5 | save_images_to_annotations_zip      | Whether to add images files to .zip annotations to upload to CVAT                                     | False        |
 | 6 | cvat_json     | Should a json file with labels for CVAT be created                                            | False        |
 | 7 | all_conf    | The value of the confidence of all model classes, condidences from config file don`t use        | None         |
 | 8 | zero_shot_segmentation    | When set to True, it allows for zero-shot instance segmentation using SAM from any source detection network  | False |

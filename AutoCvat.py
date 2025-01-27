@@ -20,18 +20,7 @@ class LengthMismatchError(Exception):
         super().__init__(message)
 
 
-def generate_and_save_class_list(original_classes, file_name="new_classes.json"):
-    """
-    Generates a list of class dictionaries with random colors and saves it to a JSON file.
-
-    Parameters:
-        original_classes (list): List of classes.
-        file_name (str, optional): Name of the file to save the class list.
-            Defaults to "new_classes.json".
-
-    Returns:
-        None
-    """
+def generate_and_save_as_json_cvat_labels(original_classes, file_name="new_classes.json"):
     # Generate a random unique color for each class
     colors = ["#" + "".join(random.choices("0123456789ABCDEF", k=6)) for _ in original_classes]
 
@@ -73,7 +62,7 @@ def generate_and_save_class_list(original_classes, file_name="new_classes.json")
     type=str,
 )
 @click.option(
-    "--save_photo",
+    "--save_images_to_annotations_zip",
     default=False,
     help="Whether to create a zip file with photos to upload to CVAT",
     type=bool,
@@ -101,7 +90,7 @@ def main(**kwargs):
     model_pth = kwargs["weights"]
     input_folder = kwargs["img_folder"]
     configs = kwargs["yaml_pth"]
-    save_photo = bool(kwargs["save_photo"])
+    save_images_to_annotations_zip = bool(kwargs["save_images_to_annotations_zip"])
     cvat_json = bool(kwargs["cvat_json"])
     conf = kwargs["all_conf"]
     use_box_propt_sam = kwargs["zero_shot_segmentation"]
@@ -129,33 +118,18 @@ def main(**kwargs):
     if os.path.exists(result_folder):
         shutil.rmtree(result_folder)
 
-    # If the image upload folder exists, delete it and create a new one
-    if os.path.exists("images_for_cvat"):
-        shutil.rmtree("images_for_cvat")
-
     # Create a result folder for annotations and images for uploading to cvat
     os.mkdir(result_folder)
     os.mkdir(result_folder + "/annotations")
-    os.mkdir(result_folder + "/images")
 
-    if save_photo:
-        os.mkdir("images_for_cvat")
-    # Get the list of files in the source folder
-    files = os.listdir(input_folder)
-    # Copy each file from the source folder to the target folder
-    for file_name in files:
-        source_file = os.path.join(input_folder, file_name)
-        destination_file = os.path.join(result_folder + "/images", file_name)
-        shutil.copy2(source_file, destination_file)  # Use shutil.copy2 to copy with metadata
-        if save_photo:
-            shutil.copy2(source_file, os.path.join("images_for_cvat", file_name))
 
-    if save_photo:
-        # Create a zip archive for uploading to CVAT
-        shutil.make_archive("images_for_cvat", "zip", "images_for_cvat")
-        # Delete the image folder for uploading to CVAT
-        shutil.rmtree("images_for_cvat")
-        print("Zip archive for uploading to CVAT: images_for_cvat.zip")
+    if save_images_to_annotations_zip:
+        files = os.listdir(input_folder)
+        os.mkdir(result_folder + "/images")
+        for file_name in files:
+            source_file = os.path.join(input_folder, file_name)
+            destination_file = os.path.join(result_folder + "/images", file_name)
+            shutil.copy2(source_file, destination_file)  
 
     # Create a JSON string in COCO format
     datagen = DataGen(input_folder)
@@ -195,9 +169,8 @@ def main(**kwargs):
     # Delete the result folder
     shutil.rmtree(result_folder)
 
-    # Create a json for the CVAT project
     if cvat_json:
-        generate_and_save_class_list(classes_cvat)
+        generate_and_save_as_json_cvat_labels(classes_cvat)
 
 
 if __name__ == "__main__":
