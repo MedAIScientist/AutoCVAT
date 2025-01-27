@@ -1,5 +1,6 @@
 import numpy as np
 from ultralytics import YOLO
+from tqdm import tqdm
 import cv2
 
 
@@ -76,7 +77,7 @@ class Inferencer:
         """
         mask_id = 0
 
-        for element in self.elements:
+        for element in tqdm(self.elements, desc="Processing images", unit="image", total=len(self.elements)):
             predictions = self.model.predict(
                 element.image,
                 imgsz=self.imgsz,

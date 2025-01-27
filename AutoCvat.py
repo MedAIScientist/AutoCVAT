@@ -95,6 +95,16 @@ def main(**kwargs):
     conf = kwargs["all_conf"]
     use_box_propt_sam = kwargs["zero_shot_segmentation"]
 
+    # Check if the folder exists
+    if not os.path.exists(input_folder):
+        print(f"Folder '{input_folder}' does not exist.")
+        return 
+
+    # Check if the folder is empty
+    if not os.listdir(input_folder):
+        print(f"Folder '{input_folder}' is empty.")
+        return  
+        
     # Load data from YAML file
     with open(configs, "r") as yaml_file:
         configs = yaml.safe_load(yaml_file)
@@ -121,7 +131,6 @@ def main(**kwargs):
     # Create a result folder for annotations and images for uploading to cvat
     os.mkdir(result_folder)
     os.mkdir(result_folder + "/annotations")
-
 
     if save_images_to_annotations_zip:
         files = os.listdir(input_folder)

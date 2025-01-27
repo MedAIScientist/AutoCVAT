@@ -19,16 +19,16 @@ Install all necessary libraries:
 
 ```pip install -r requirements.txt```
 
-__This repository supports all relevant models from Ultralytics:__ YOLOv8/v9/v10 (and lower) for detection and segmentation, RT-DETR, FastSAM, and YOLO-World (Real-Time Open-Vocabulary Object Detection).
+__This repository supports all relevant models from Ultralytics:__ YOLOv8/v9/v10/11 (and lower) for detection and segmentation, RT-DETR, FastSAM, and YOLO-World (Real-Time Open-Vocabulary Object Detection).
 
 ## How to run the code:
 To interact with the repository, you need to set the following command in the cmd terminal:
 ```
-python AutoCvat.py --img_folder="images" --weights=yolov8m-seg.pt --yaml_pth=config.yaml
+python AutoCvat.py --img_folder="images" --weights=yolo11m-seg.pt --yaml_pth=config.yaml
 ```
 An example of a more fine-tuning with all possible CLI parameters:
 ```
-python AutoCvat.py --img_folder=images --weights=yolov8m-seg.pt --annotations_zip=cars_annotations --yaml_pth=config.yaml --all_conf=0.2 --cvat_json=True --save_photo=True --zero_shot_segmentation=False
+python AutoCvat.py --img_folder=images --weights=yolo11m-seg.pt --annotations_zip=cars_annotations --yaml_pth=config.yaml --all_conf=0.2 --cvat_json=True --save_photo=True --zero_shot_segmentation=False
 ```
 
 Table 1. Explanation of CLI command values:
@@ -171,4 +171,3 @@ The contents of the json file must be inserted in "Raw" in the header of the pro
 [1]: https://docs.ultralytics.com/models/
 [2]: https://github.com/ultralytics/ultralytics/blob/main/ultralytics/cfg/datasets/coco.yaml
 [3]: https://docs.ultralytics.com/models/yolo-world/
-[4]: https://github.com/Koldim2001

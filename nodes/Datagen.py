@@ -25,10 +25,6 @@ class DataGen:
         Returns:
             list: List of Element objects containing image information.
         """
-        if not os.path.isdir(self.folder_path):
-            print(f'Folder "{self.folder_path}" does not exist')
-            return
-
         data_all_elements = []
         # Iterate through all files in the folder
         for num, filename in enumerate(os.listdir(self.folder_path)):
