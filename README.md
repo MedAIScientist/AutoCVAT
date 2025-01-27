@@ -28,7 +28,7 @@ python AutoCvat.py --img_folder="images" --weights=yolo11m-seg.pt --yaml_pth=con
 ```
 An example of a more fine-tuning with all possible CLI parameters:
 ```
-python AutoCvat.py --img_folder=images --weights=yolo11m-seg.pt --annotations_zip=cars_annotations --yaml_pth=config.yaml --all_conf=0.2 --cvat_json=True --save_photo=True --zero_shot_segmentation=False
+python AutoCvat.py --img_folder=images --weights=yolo11m-seg.pt --annotations_zip=cars_annotations --yaml_pth=config.yaml --all_conf=0.2 --cvat_json=True --save_images_to_annotations_zip=True --zero_shot_segmentation=False
 ```
 
 Table 1. Explanation of CLI command values:
