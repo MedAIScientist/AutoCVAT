@@ -19,7 +19,7 @@ Install all necessary libraries:
 
 ```pip install -r requirements.txt```
 
-__This repository supports all relevant models from Ultralytics:__ YOLOv8/v9/v10/11 (and lower) for detection and segmentation, RT-DETR, FastSAM, and YOLO-World (Real-Time Open-Vocabulary Object Detection).
+__This repository supports all relevant models from Ultralytics:__ YOLOv8/v9/v10/11/12 (and lower) for detection and segmentation, RT-DETR, FastSAM, and YOLO-World (Real-Time Open-Vocabulary Object Detection).
 
 ## How to run the code:
 To interact with the repository, you need to set the following command in the cmd terminal:
